@@ -142,13 +142,13 @@ def manpage(manpage, section, path_index):
                                  '\">' + clean_urls[index] + '</a>')
 
     # Find references to other man pages and link them
-    related = re.findall(r'[a-zA-Z0-9]+\([1-8]\)', body)
+    related = re.findall(r'[a-zA-Z0-9.]+\([1-8]\)', body)
     for item in related:
         section = item[-2]
         manpage = item[:-3]
         body = body.replace(item, 
-                            '<strong><a href=\"/' + section + \
-                            '/' + manpage + '\">' + item + \
+                            '<strong><a href=\"/' + manpage + \
+                            '/' + section + '\">' + item + \
                             '</a></strong>')
 
     # Sometimes references to other man pages are inside strong tags

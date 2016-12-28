@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form id="search" 
+          action="{{ url_for('index') }}" 
+          method="post">
+
+        <label for="search-field" class="large-cmd">
+            <strong>$</strong><em>&nbsp;man&nbsp;</em>
+        </label> 
+
+        <input type="text" 
+               id="search-field" 
+               name="search-field" 
+               autofocus>
+
+        <input type="submit" 
+               class="u-pull-right"
+               value="&#9166;">
+    </form>
+
+    {% if results %}
+    <p>Manual entries found for <strong>{{ query }}</strong> in following sections:</p>
+    <ul class="search-results">
+        {% for key, value in results.items() recursive %}
+        <li>
+            <a href="{{ url_for('manpage', manpage=key, section=results[key]['section'], path_index=results[key]['path_index']) }}">
+                {{ key }}({{ results[key]['section'] }})
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/inputFieldCursorPosition.js') }}"></script>
+{% endblock %}

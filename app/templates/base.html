@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/fonts.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <title>{{ title }}</title>
+</head>
+
+<body onload="onLoad()">
+    <a href="#" title="Back to top" id="back-to-top">&#8683;</a>
+    <div class="container">
+        {% block content %}{% endblock %}
+
+        {% with messages = get_flashed_messages() -%}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message|safe }}</p>
+                {% endfor %}
+            {% endif %}
+        {%- endwith %}
+    </div>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/onScrollEffects.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>

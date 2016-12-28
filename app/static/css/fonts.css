@@ -1,0 +1,43 @@
+/* Charter */
+@font-face {
+  font-family: 'Charter';
+  font-style: normal;
+  src:url(../fonts/Charter-Bold.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Charter-Bold-Italic';
+  font-style: normal;
+  src: url(../fonts/Charter-Bold-Italic.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Charter-Italic';
+  font-style: normal;
+  src: url(../fonts/Charter-Italic.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Charter-Regular';
+  font-style: normal;
+  src: url(../fonts/Charter-Regular.otf) format('opentype');
+}
+
+/* Source Code Pro */
+@font-face {
+    font-family: 'SourceCodePro-Regular';
+    font-style: normal;
+    src: url(../fonts/SourceCodePro-Regular.otf) format('opentype');
+}
+@font-face {
+    font-family: 'SourceCodePro-Light';
+    font-style: normal;
+    src: url(../fonts/SourceCodePro-Light.otf) format('opentype');
+}
+@font-face {
+    font-family: 'SourceCodePro-Medium';
+    font-style: normal;
+    src: url(../fonts/SourceCodePro-Medium.otf) format('opentype');
+}
+@font-face {
+    font-family: 'SourceCodePro-Semibold';
+    font-style: normal;
+    src: url(../fonts/SourceCodePro-Semibold.otf) format('opentype');
+}

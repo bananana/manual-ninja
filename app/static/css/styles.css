@@ -1,0 +1,212 @@
+/* Reset styles */
+html {
+    margin:0;
+    padding:0;
+    border:0;
+}
+body, div, span, object, iframe,
+p, blockquote, pre,
+a, abbr, acronym, address, code,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, dialog, figure, footer, header,
+hgroup, nav, section {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+
+/* Basic styles */
+body {
+    font-size: 1.4em; 
+    font-weight: 400;
+    font-family: "Charter-Regular", serif;
+    text-rendering: optimizeLegibility;
+    line-height: 1.6;
+    color: #222; 
+}
+.container {
+    width: 400px;
+    margin: 0 auto;
+}
+@media (min-width: 750px) {
+    .container {
+        width: 600px;
+    }
+}
+@media (min-width: 1000px) {
+    .container {
+        width: 900px;
+    }
+}
+h1, h2,
+.section-link {
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+h2 {
+    margin-bottom: 0;
+    margin-top: 1.5em;
+}
+hr {
+    border-width: 0;
+    border-top: 1px solid #e1e1e1;
+    margin-top: 1.5em;
+}
+a {
+    text-decoration: none;
+    white-space: nowrap;
+}
+a:hover {
+    text-decoration: underline;
+}
+strong, em {
+    font-size: 0.9em;
+}
+strong {
+    font-weight: unset;
+    font-family: "SourceCodePro-Semibold", monospace;
+}
+em {
+    font-family: "SourceCodePro-Light", monospace;
+    font-style: normal;
+}
+em.slanted {
+    font-family: "Charter-Italic", serif;
+    font-size: 1em;
+}
+ul {
+    padding-left: 1em;
+}
+
+/* Navigation */
+#back-to-top {
+    display: none;
+    background-color: #e5e5e5;
+    padding: 0 .2em;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    font-size: 2em;
+    font-weight: bold;
+    color: #222;
+    text-decoration: none;
+}
+#back-to-top:hover {
+    padding-bottom: .1em;
+}
+.anchor-link {
+    display: none;
+    color: blue;
+    font-weight: normal;
+    cursor: pointer;
+}
+.anchor-link:active,
+.anchor-link:visited {
+    color: purple;
+}
+.anchor-link:before {
+    content: '\00A7';
+}
+h2:hover .anchor-link {
+    display: inline;
+}
+
+/* Commands and their descriptions */
+.standalone-paragraph {
+    margin-top: 1em;
+    margin-left: 11%;
+    margin-bottom: 0;
+}
+.command {
+    font-family: "SourceCodePro-Regular", monospace;
+    margin-top: 1em;
+    margin-left: 11%;
+    margin-bottom: 0;
+}
+table tr td:nth-child(2n) p {
+    margin-top: 0;
+    margin-bottom: 1em;
+}
+table tr td:nth-child(2) p {
+    font-family: "SourceCodePro-Regular", monospace;
+}
+table tr:last-child td p {
+    margin-bottom: 0;
+}
+.description {
+    margin-top: 0;
+    margin-left: 22%;
+}
+.table-command {
+    margin-top: 1em;
+}
+
+/* Search form */
+.large-cmd {
+    font-size: 3em;
+    line-height: 1.2em;
+    display: inline-block;
+}
+.large-cmd strong,
+.large-cmd em {
+    display: inline-block;
+}
+#search {
+    display: block; 
+    border-bottom: 2px solid #e1e1e1;
+    margin-top: 150px;
+    font-size: 0.4em;
+}
+#search input[type='text'] {
+    display: inline-block;
+    border: none;
+    width: 110px;
+    font-size: 2.7em;
+    padding-top: 5px 0 2px 0;
+    vertical-align: bottom;
+    font-family: "SourceCodePro-Light", monospace;
+}
+#search input[type='submit'] {
+    display: inline-block;
+    border: none; 
+    font-size: 2.7em;
+    vertical-align: bottom;
+    background: none;
+    cursor: pointer;
+}
+#search input[type='submit']:hover {
+    background-color: #e1e1e1;
+}
+@media (min-width: 750px) {
+    #search input[type='text'] {
+        width: 310px;
+    }
+}
+@media (min-width: 1000px) {
+    #search {
+        margin-top: 300px;
+        font-size: 0.9em;
+    }
+    #search input[type='text'] {
+        width: 460px;
+    }
+    #search input[type='submit'] {
+        font-size: 2.7em;
+        margin-top: 1px;
+    }
+    #search input[type='submit']:hover {
+    }
+}
+.search-results {
+}
+
+/* Utilities */
+.u-pull-right {
+    float: right;
+}

@@ -1,5 +1,5 @@
 from app import app
-from app.config import DEFAULT_MANPATH, MANPATH
+from app.config import SITE_TITLE, DEFAULT_MANPATH, MANPATH
 from app.search import search
 from flask import render_template, request, redirect, url_for, flash
 from bs4 import BeautifulSoup, Tag
@@ -24,10 +24,13 @@ def index():
 
         if len(search_results) == 1:
             # Only one result, display it immediately
+            man = search_results.keys()[0]
+            sec = search_results[search_request]['section']
+            path = search_results[search_request]['path_index']
             return redirect(url_for('manpage', 
-                                    manpage=search_results.keys()[0],
-                                    section=search_results[search_request]['section'],
-                                    path_index=search_results[search_request]['path_index']))
+                                    manpage=man,
+                                    section=sec,
+                                    path_index=path))
         elif len(search_results) > 1:
             # More than 1 result, display them as a list under search bar
             return render_template('index.html',
@@ -55,8 +58,10 @@ def index():
            defaults={'path_index':MANPATH.index(DEFAULT_MANPATH)})
 @app.route('/<manpage>/<section>/<int:path_index>/')
 def manpage(manpage, section, path_index):
-    # Extract html from manpage archive 
+    #: Get manpath based on index passed to the page
     manpath = MANPATH[path_index]
+
+    # Extract html from manpage archive 
     archive = glob(manpath + '/man' + \
                    section + '/' + \
                    manpage + '.' + \
@@ -106,7 +111,7 @@ def manpage(manpage, section, path_index):
         cmd['class'] = 'table-command'
 
     #: Extract title string 
-    title = soup.title.string
+    title = soup.title.string + '(' + section + ')'
 
     #: Cast body into unicode for further processing
     body = unicode(soup.body)

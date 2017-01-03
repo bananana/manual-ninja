@@ -34,7 +34,7 @@ def index():
         elif len(search_results) > 1:
             # More than 1 result, display them as a list under search bar
             return render_template('index.html',
-                                   title='manny',
+                                   title=SITE_TITLE,
                                    query=search_request,
                                    results=search_results)
         else:
@@ -43,7 +43,7 @@ def index():
                   request.form['search-field'] + \
                   '</strong>')
             return render_template('index.html',
-                                   title='manny',
+                                   title=SITE_TITLE,
                                    query=search_request,
                                    results=None)
     else:

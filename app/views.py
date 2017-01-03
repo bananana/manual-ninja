@@ -18,7 +18,7 @@ def index():
     displayed under the search box. If there are no results found, an error 
     message is displayed under the search box.
     '''
-    if request.method == 'POST':
+    if request.method == 'POST' and request.form['search-field'] != '':
         search_request = request.form['search-field'] 
         search_results = search(search_request) 
 

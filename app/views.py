@@ -58,6 +58,13 @@ def index():
            defaults={'path_index':MANPATH.index(DEFAULT_MANPATH)})
 @app.route('/<manpage>/<section>/<int:path_index>/')
 def manpage(manpage, section, path_index):
+    '''Render an individual man page based on it's name, section and path.
+    The name and section are pretty self-explanatory. The path is generated
+    through MANPATH global which is set in app/config.py, it's a list of all 
+    paths available through `manpath` command. The index of appropriate path
+    is returned by the search() method from app/search.py. If no path_index is
+    provided it defaults to whatever is set by DEFAULT_MANPATH global.
+    '''
     #: Get manpath based on index passed to the page
     manpath = MANPATH[path_index]
 

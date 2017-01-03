@@ -73,7 +73,8 @@ def manpage(manpage, section, path_index):
                    section + '/' + \
                    manpage + '.' + \
                    section + '*')
-    
+
+    # Some operating systems compress man pages with gz, some don't
     if archive[0].endswith('.gz'): 
         expand = subprocess.Popen(['zcat', archive[0]], 
                                   stdout=subprocess.PIPE)

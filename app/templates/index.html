@@ -20,7 +20,7 @@
                value="&#9166;">
     </form>
 
-    {% if results %}
+    {% if results -%}
     <p>Manual entries found for <strong>{{ query }}</strong> in following sections:</p>
     <ul class="search-results">
         {% for key, value in results.items() recursive %}
@@ -34,7 +34,7 @@
         </li>
         {% endfor %}
     </ul>
-    {% endif %}
+    {% endif -%}
 
 {% endblock %}
 

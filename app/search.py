@@ -3,6 +3,10 @@ from glob import glob
 import os
 
 def search(manual):
+    '''Search for manual. First find everything that matches the input, then
+    break it up into components (manpath, manpage, section) and return it as a
+    dictionary.
+    '''
     #: Absolute paths of any manpages found
     abs_paths = []
     for path in MANPATH:

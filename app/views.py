@@ -1,5 +1,5 @@
 from app import app
-from app.config import DEFAULT_MANPATH, MANPATH
+from app.config import SITE_TITLE, DEFAULT_MANPATH, MANPATH
 from app.search import search
 from flask import render_template, request, redirect, url_for, flash
 from bs4 import BeautifulSoup, Tag
@@ -18,20 +18,23 @@ def index():
     displayed under the search box. If there are no results found, an error 
     message is displayed under the search box.
     '''
-    if request.method == 'POST':
+    if request.method == 'POST' and request.form['search-field'] != '':
         search_request = request.form['search-field'] 
         search_results = search(search_request) 
 
         if len(search_results) == 1:
             # Only one result, display it immediately
+            man = search_results.keys()[0]
+            sec = search_results[search_request]['section']
+            path = search_results[search_request]['path_index']
             return redirect(url_for('manpage', 
-                                    manpage=search_results.keys()[0],
-                                    section=search_results[search_request]['section'],
-                                    path_index=search_results[search_request]['path_index']))
+                                    manpage=man,
+                                    section=sec,
+                                    path_index=path))
         elif len(search_results) > 1:
             # More than 1 result, display them as a list under search bar
             return render_template('index.html',
-                                   title='manny',
+                                   title=SITE_TITLE,
                                    query=search_request,
                                    results=search_results)
         else:
@@ -40,7 +43,7 @@ def index():
                   request.form['search-field'] + \
                   '</strong>')
             return render_template('index.html',
-                                   title='manny',
+                                   title=SITE_TITLE,
                                    query=search_request,
                                    results=None)
     else:
@@ -55,13 +58,23 @@ def index():
            defaults={'path_index':MANPATH.index(DEFAULT_MANPATH)})
 @app.route('/<manpage>/<section>/<int:path_index>/')
 def manpage(manpage, section, path_index):
-    # Extract html from manpage archive 
+    '''Render an individual man page based on it's name, section and path.
+    The name and section are pretty self-explanatory. The path is generated
+    through MANPATH global which is set in app/config.py, it's a list of all 
+    paths available through `manpath` command. The index of appropriate path
+    is returned by the search() method from app/search.py. If no path_index is
+    provided it defaults to whatever is set by DEFAULT_MANPATH global.
+    '''
+    #: Get manpath based on index passed to the page
     manpath = MANPATH[path_index]
+
+    # Extract html from manpage archive 
     archive = glob(manpath + '/man' + \
                    section + '/' + \
                    manpage + '.' + \
                    section + '*')
-    
+
+    # Some operating systems compress man pages with gz, some don't
     if archive[0].endswith('.gz'): 
         expand = subprocess.Popen(['zcat', archive[0]], 
                                   stdout=subprocess.PIPE)
@@ -106,7 +119,7 @@ def manpage(manpage, section, path_index):
         cmd['class'] = 'table-command'
 
     #: Extract title string 
-    title = soup.title.string
+    title = soup.title.string + '(' + section + ')'
 
     #: Cast body into unicode for further processing
     body = unicode(soup.body)

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+
     <form id="search" 
           action="{{ url_for('index') }}" 
           method="post">
@@ -19,18 +20,22 @@
                value="&#9166;">
     </form>
 
-    {% if results %}
+    {% if results -%}
     <p>Manual entries found for <strong>{{ query }}</strong> in following sections:</p>
     <ul class="search-results">
         {% for key, value in results.items() recursive %}
         <li>
-            <a href="{{ url_for('manpage', manpage=key, section=results[key]['section'], path_index=results[key]['path_index']) }}">
+            <a href="{{ url_for('manpage', 
+                                manpage=key, 
+                                section=results[key]['section'], 
+                                path_index=results[key]['path_index']) }}">
                 {{ key }}({{ results[key]['section'] }})
             </a>
         </li>
         {% endfor %}
     </ul>
-    {% endif %}
+    {% endif -%}
+
 {% endblock %}
 
 {% block scripts %}
